@@ -1,6 +1,7 @@
 {
   "name": "skillcrew",
   "version": "0.2.0-alpha.2",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "engines": { "node": ">=24" },

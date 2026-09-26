@@ -148,3 +148,9 @@ node scripts/install.mjs --project 'C:\Projects\my-workspace'
 固定待办模板仍是首版范围；尚未接管已有仓库、后端、登录、部署或任意技术栈。没有自动计费预算控制，也未证明多模型必然比单模型更快或更省。新版恢复保证适用于 0.2 创建的运行；0.1 失败记录建议保留并新建运行。
 
 开发：`npm ci`、`npm test`。实际验证及限制见 [VALIDATION.md](VALIDATION.md)，可运行示例见 [DEMO.md](DEMO.md)。
+
+## 开源协议
+
+SkillCrew 使用 [MIT License](LICENSE)。Copyright (c) 2026 0d000721-ui。
+
+允许使用、修改、分发及商用，分发时须保留版权声明和许可文本。第三方依赖遵循各自的许可证。

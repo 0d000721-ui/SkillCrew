@@ -29,6 +29,7 @@ if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
       await mkdir(dirname(stagedSkill), { recursive: true });
       await cp(join(packageRoot, 'skills', 'skillcrew'), stagedSkill, { recursive: true, errorOnExist: true, force: false });
       created.push(stagedSkill);
+      await cp(join(packageRoot, 'LICENSE'), join(stagedSkill, 'LICENSE'), { errorOnExist: true, force: false });
       const entry = join(stagedSkill, 'SKILL.md');
       const instructions = (await readFile(entry, 'utf8'))
         .replaceAll('{{SKILLCREW_RUNTIME}}', join(skill, 'runtime', 'bin', 'skillcrew.mjs').replaceAll('\\', '/'))
@@ -39,6 +40,7 @@ if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
         await cp(join(packageRoot, name), join(stagedSkill, 'runtime', name), { recursive: true, errorOnExist: true, force: false });
       }
       await cp(join(packageRoot, 'package.json'), join(stagedSkill, 'runtime', 'package.json'), { errorOnExist: true, force: false });
+      await cp(join(packageRoot, 'LICENSE'), join(stagedSkill, 'runtime', 'LICENSE'), { errorOnExist: true, force: false });
       if (agent) {
         await mkdir(dirname(agent), { recursive: true });
         await cp(join(packageRoot, 'agents', 'skillcrew-reviewer.md'), stagedAgent, { errorOnExist: true, force: false });
