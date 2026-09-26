@@ -1,0 +1,259 @@
+{
+  "version": "0.2.0-alpha.2",
+  "executorTests": {
+    "passed": 73,
+    "failed": 0
+  },
+  "main": {
+    "id": "1a1f268d-4440-44e9-a42f-0a183acefc4d",
+    "status": "ready",
+    "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+    "started": "2026-09-26T01:57:46.357Z",
+    "updated": "2026-09-26T02:20:21.250Z",
+    "rounds": 0,
+    "reusedWorkers": 1,
+    "checks": [
+      {
+        "id": "install",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "typecheck",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "build",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "unit",
+        "passed": true,
+        "count": 6,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "browser",
+        "passed": true,
+        "count": 2,
+        "exitCode": 0,
+        "mode": "local"
+      }
+    ],
+    "reviewIssues": [],
+    "routing": {
+      "mode": "single",
+      "selection": "capability_catalog",
+      "snapshot": {
+        "checkedAt": "2026-09-26T01:57:46.355Z",
+        "primaryBasis": "available candidates + configured role preferences + dated evaluation evidence",
+        "webDevBasis": "https://arena.ai/leaderboard/code/webdev",
+        "rationale": "Preferences are explicit configuration, not independently measured global rankings."
+      },
+      "primary": {
+        "provider": "codex",
+        "model": "gpt-6-astra",
+        "role": "primary",
+        "effort": "max"
+      },
+      "coLead": null,
+      "ui": {
+        "provider": "agy",
+        "model": "gemini-3.8-flash-high",
+        "role": "ui"
+      },
+      "logic": {
+        "provider": "codex",
+        "model": "gpt-6-sol",
+        "role": "logic"
+      },
+      "reviewer": {
+        "provider": "agy",
+        "model": "claude-opus-4-6-thinking",
+        "role": "review"
+      },
+      "decisions": {
+        "primary": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "ui": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "logic": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "review": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations"
+      },
+      "inventory": {
+        "agy": [
+          "gemini-3.8-flash-high",
+          "gemini-3.8-flash-medium",
+          "gemini-3.8-flash-low",
+          "gemini-3.7-flash-high",
+          "gemini-3.7-flash-medium",
+          "gemini-3.7-flash-low",
+          "gemini-3.6-flash-high",
+          "gemini-3.6-flash-medium",
+          "gemini-3.6-flash-low",
+          "gemini-3.1-pro-high",
+          "gemini-3.1-pro-low",
+          "claude-sonnet-4-6",
+          "claude-opus-4-6-thinking",
+          "gpt-oss-120b-medium"
+        ],
+        "codex": [
+          "gpt-6-astra",
+          "gpt-6-sol",
+          "gpt-6-luna",
+          "gpt-5.6-sol",
+          "gpt-5.6-terra",
+          "gpt-5.6-luna",
+          "gpt-5.5"
+        ],
+        "notes": [
+          "codex: installed CLI model cache; may be stale; served model remains unknown in JSONL",
+          "agy: live model listing"
+        ]
+      }
+    },
+    "provenance": "fresh real planning/consultation/generation/review; actual agy startup failure followed by resume; one accepted Codex checkpoint reused",
+    "implementationVersion": "0.2.0-alpha.1"
+  },
+  "repair": {
+    "id": "8c1f99de-f19f-4143-b1e9-6179ad228f88",
+    "status": "ready",
+    "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+    "started": "2026-09-26T02:16:48.171Z",
+    "updated": "2026-09-26T02:20:45.839Z",
+    "rounds": 1,
+    "reusedWorkers": 0,
+    "checks": [
+      {
+        "id": "install",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "typecheck",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "build",
+        "passed": true,
+        "count": 0,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "unit",
+        "passed": true,
+        "count": 6,
+        "exitCode": 0,
+        "mode": "local"
+      },
+      {
+        "id": "browser",
+        "passed": true,
+        "count": 2,
+        "exitCode": 0,
+        "mode": "local"
+      }
+    ],
+    "reviewIssues": [],
+    "routing": {
+      "mode": "single",
+      "selection": "capability_catalog",
+      "snapshot": {
+        "checkedAt": "2026-09-26T01:57:46.355Z",
+        "primaryBasis": "available candidates + configured role preferences + dated evaluation evidence",
+        "webDevBasis": "https://arena.ai/leaderboard/code/webdev",
+        "rationale": "Preferences are explicit configuration, not independently measured global rankings."
+      },
+      "primary": {
+        "provider": "codex",
+        "model": "gpt-6-astra",
+        "role": "primary",
+        "effort": "max"
+      },
+      "coLead": null,
+      "ui": {
+        "provider": "agy",
+        "model": "gemini-3.8-flash-high",
+        "role": "ui"
+      },
+      "logic": {
+        "provider": "codex",
+        "model": "gpt-6-sol",
+        "role": "logic"
+      },
+      "reviewer": {
+        "provider": "agy",
+        "model": "claude-opus-4-6-thinking",
+        "role": "review"
+      },
+      "decisions": {
+        "primary": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "ui": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "logic": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "review": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations"
+      },
+      "inventory": {
+        "agy": [
+          "gemini-3.8-flash-high",
+          "gemini-3.8-flash-medium",
+          "gemini-3.8-flash-low",
+          "gemini-3.7-flash-high",
+          "gemini-3.7-flash-medium",
+          "gemini-3.7-flash-low",
+          "gemini-3.6-flash-high",
+          "gemini-3.6-flash-medium",
+          "gemini-3.6-flash-low",
+          "gemini-3.1-pro-high",
+          "gemini-3.1-pro-low",
+          "claude-sonnet-4-6",
+          "claude-opus-4-6-thinking",
+          "gpt-oss-120b-medium"
+        ],
+        "codex": [
+          "gpt-6-astra",
+          "gpt-6-sol",
+          "gpt-6-luna",
+          "gpt-5.6-sol",
+          "gpt-5.6-terra",
+          "gpt-5.6-luna",
+          "gpt-5.5"
+        ],
+        "notes": [
+          "codex: installed CLI model cache; may be stale; served model remains unknown in JSONL",
+          "agy: live model listing"
+        ]
+      }
+    },
+    "provenance": "plan and initial source reused from main as explicit fixture; deterministic TypeScript fault injected; actual primary triage, Codex repair, all local checks and new Opus review",
+    "implementationVersion": "0.2.0-alpha.1"
+  },
+  "limits": [
+    "Fixed React todo template",
+    "Windows local end-to-end; Docker/Linux not live tested",
+    "Dual lead tested with injected model responses, not a fresh live dual run",
+    "Ranking scores are optional configured evidence, not automatic leaderboard refresh"
+  ],
+  "automaticSelection": {
+    "checkedAt": "2026-09-26T02:37:59.154Z",
+    "mode": "dual",
+    "method": "Real agy model listing and local Codex cache; no inference calls.",
+    "route": "auto-routing.json",
+    "summary": "auto-routing-summary.txt",
+    "planning": "Default dual route tested with injected model replies; no new live dual workflow.",
+    "hostChoice": "Implemented in host SKILL instructions; no new interactive host session tested.",
+    "compatibility": "alpha2-resume-compatibility.json"
+  }
+}

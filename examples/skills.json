@@ -1,0 +1,5 @@
+{
+  "skills": [
+    { "id": "clear-chinese-copy", "path": "clear-chinese-copy.md", "roles": ["ui"], "phases": ["implement", "repair"] }
+  ]
+}

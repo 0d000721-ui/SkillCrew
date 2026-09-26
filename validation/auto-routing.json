@@ -1,0 +1,76 @@
+{
+  "mode": "dual",
+  "requestedMode": "auto",
+  "notices": [],
+  "selection": "capability_catalog",
+  "snapshot": {
+    "checkedAt": "2026-09-26T02:37:59.154Z",
+    "primaryBasis": "available candidates + configured role preferences + dated evaluation evidence",
+    "webDevBasis": "https://arena.ai/leaderboard/code/webdev",
+    "rationale": "Preferences are explicit configuration, not independently measured global rankings."
+  },
+  "primary": {
+    "provider": "codex",
+    "model": "gpt-6-astra",
+    "role": "primary",
+    "effort": "max"
+  },
+  "coLead": {
+    "provider": "agy",
+    "model": "claude-opus-4-6-thinking",
+    "role": "co_lead"
+  },
+  "ui": {
+    "provider": "agy",
+    "model": "gemini-3.8-flash-high",
+    "role": "ui"
+  },
+  "logic": {
+    "provider": "codex",
+    "model": "gpt-6-sol",
+    "role": "logic"
+  },
+  "reviewer": {
+    "provider": "agy",
+    "model": "claude-opus-4-6-thinking",
+    "role": "review"
+  },
+  "decisions": {
+    "primary": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+    "co_lead": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+    "ui": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+    "logic": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+    "review": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations"
+  },
+  "inventory": {
+    "agy": [
+      "gemini-3.8-flash-high",
+      "gemini-3.8-flash-medium",
+      "gemini-3.8-flash-low",
+      "gemini-3.7-flash-high",
+      "gemini-3.7-flash-medium",
+      "gemini-3.7-flash-low",
+      "gemini-3.6-flash-high",
+      "gemini-3.6-flash-medium",
+      "gemini-3.6-flash-low",
+      "gemini-3.1-pro-high",
+      "gemini-3.1-pro-low",
+      "claude-sonnet-4-6",
+      "claude-opus-4-6-thinking",
+      "gpt-oss-120b-medium"
+    ],
+    "codex": [
+      "gpt-6-astra",
+      "gpt-6-sol",
+      "gpt-6-luna",
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna",
+      "gpt-5.5"
+    ],
+    "notes": [
+      "codex: installed CLI model cache; may be stale; served model remains unknown in JSONL",
+      "agy: live model listing"
+    ]
+  }
+}

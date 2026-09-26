@@ -1,0 +1,26 @@
+{
+  "name": "skillcrew-react-todo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.55.1",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "@types/node": "24.10.4",
+    "typescript": "5.9.3",
+    "vite": "6.3.5",
+    "vitest": "3.2.4"
+  }
+}

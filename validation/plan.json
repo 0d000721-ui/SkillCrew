@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "projectType": "react-todo",
+  "request": "做一个支持拖拽、分类和本地保存的待办应用。",
+  "assumptions": [
+    "新建项目",
+    "数据仅保存在当前浏览器",
+    "单用户使用",
+    "React + TypeScript + Vite 固定技术栈"
+  ],
+  "features": [
+    "添加、编辑、删除和完成待办",
+    "创建和管理分类",
+    "分类内及跨分类拖拽排序",
+    "刷新后保留数据",
+    "异常存储恢复"
+  ],
+  "acceptanceIds": [
+    "AC-CRUD",
+    "AC-CATEGORY",
+    "AC-DRAG",
+    "AC-PERSIST",
+    "AC-RECOVER"
+  ],
+  "routing": {
+    "mode": "single",
+    "selection": "capability_catalog",
+    "snapshot": {
+      "checkedAt": "2026-09-26T01:57:46.355Z",
+      "primaryBasis": "available candidates + configured role preferences + dated evaluation evidence",
+      "webDevBasis": "https://arena.ai/leaderboard/code/webdev",
+      "rationale": "Preferences are explicit configuration, not independently measured global rankings."
+    },
+    "primary": {
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "role": "primary",
+      "effort": "max"
+    },
+    "coLead": null,
+    "ui": {
+      "provider": "agy",
+      "model": "gemini-3.8-flash-high",
+      "role": "ui"
+    },
+    "logic": {
+      "provider": "codex",
+      "model": "gpt-6-sol",
+      "role": "logic"
+    },
+    "reviewer": {
+      "provider": "agy",
+      "model": "claude-opus-4-6-thinking",
+      "role": "review"
+    },
+    "decisions": {
+      "primary": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+      "ui": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+      "logic": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+      "review": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations"
+    },
+    "inventory": {
+      "agy": [
+        "gemini-3.8-flash-high",
+        "gemini-3.8-flash-medium",
+        "gemini-3.8-flash-low",
+        "gemini-3.7-flash-high",
+        "gemini-3.7-flash-medium",
+        "gemini-3.7-flash-low",
+        "gemini-3.6-flash-high",
+        "gemini-3.6-flash-medium",
+        "gemini-3.6-flash-low",
+        "gemini-3.1-pro-high",
+        "gemini-3.1-pro-low",
+        "claude-sonnet-4-6",
+        "claude-opus-4-6-thinking",
+        "gpt-oss-120b-medium"
+      ],
+      "codex": [
+        "gpt-6-astra",
+        "gpt-6-sol",
+        "gpt-6-luna",
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna",
+        "gpt-5.5"
+      ],
+      "notes": [
+        "codex: installed CLI model cache; may be stale; served model remains unknown in JSONL",
+        "agy: live model listing"
+      ]
+    }
+  },
+  "skills": [
+    {
+      "id": "contract-planning",
+      "roles": [
+        "primary",
+        "co_lead",
+        "ui",
+        "logic"
+      ],
+      "phases": [
+        "plan"
+      ],
+      "content": "把需求映射到固定验收 ID，使用真实 TypeScript 接口。副模型提出具体风险或疑问，主模型逐条决定采纳或拒绝并解释理由。明确每项工作依赖与文件归属。",
+      "sha256": "b9bc22d59893b5c839d1c38efb35197fa4be9000993164e30d144a16eb194653",
+      "source": "builtin"
+    },
+    {
+      "id": "accessible-todo-ui",
+      "roles": [
+        "ui"
+      ],
+      "phases": [
+        "implement",
+        "repair"
+      ],
+      "content": "组件通过固定 AppViewProps 调用业务逻辑。提供清楚的标签、键盘可操作控件、空分类放置目标。检查拖拽后的显示与持久化顺序一致。捕获业务回调错误并显示可理解的反馈。只交付 UI 和样式。",
+      "sha256": "6d020df10a4055468b2835f6e8d992d71fe7c65e660c409fc67c4e3524e988d0",
+      "source": "builtin"
+    },
+    {
+      "id": "persistent-todo-state",
+      "roles": [
+        "logic"
+      ],
+      "phases": [
+        "implement",
+        "repair"
+      ],
+      "content": "按照固定 TodoStore 接口实现状态与存储。覆盖同分类和跨分类排序、坏 JSON/无效数据恢复、写入失败。保持事务一致性，不吞掉需要 UI 展示的存储错误。只交付逻辑文件。",
+      "sha256": "0e382c81165829da7d06d0e03d407140e73b5262120d90ec534f64ad1126f94e",
+      "source": "builtin"
+    },
+    {
+      "id": "evidence-based-repair",
+      "roles": [
+        "primary",
+        "ui",
+        "logic"
+      ],
+      "phases": [
+        "repair"
+      ],
+      "content": "以失败测试、具体源码和可复现审查问题定位原因。修复任务标明文件、原因、预期结果和验证点。保留已通过的行为，不修改固定测试或契约。若须扩展接口或处理环境故障，提出阻塞，禁止声称未执行的测试通过。",
+      "sha256": "0ae25b3c726ea4cb7f3eff1cdcc0fc9f168db0ce5ed1c4b58fd6a926ffa2a64d",
+      "source": "builtin"
+    },
+    {
+      "id": "independent-review",
+      "roles": [
+        "review"
+      ],
+      "phases": [
+        "review"
+      ],
+      "content": "以独立会话检查固定验收条件。每项问题有源码文件、预期、实际和复现步骤。只有影响固定验收或正确性的缺陷列 high；未要求的装饰性体验不能升级为阻塞条件。未经亲自复现，明确标记 proposed。",
+      "sha256": "3aace8cc39cfc0cb22c521017860bb211adb1aa62ae6947536d74d632ba7277b",
+      "source": "builtin"
+    }
+  ],
+  "summary": "按 react-todo@1.0.1 冻结契约完成最终计划。Codex 仅负责 src/core/**，Gemini 仅负责 src/ui/**、src/styles/**；共同依赖只读的 src/contracts/index.ts，不修改 src/App.tsx、共享类型、依赖或 tests/**，不扩展 AppViewProps。执行前只读核对模板入口连接，验收由 runner 执行原有冻结测试。空态占位、确认框、动画和插入提示不新增为阻塞验收条件。本次仅制定计划，未修改文件或执行验证。",
+  "acceptanceMapping": {
+    "AC-CRUD": "Codex 在 src/core/store.ts 导出 createTodoStore(storage: Storage): TodoStore，实现 getState、subscribe 及任务增删改、完成状态切换；addTodo、editTodo 均在 store 层拒绝 trim 后为空的标题。src/core/useTodoApp.ts 导出 useTodoApp(): AppViewProps，重渲染时复用同一 store，通过 subscribe 更新界面并清理订阅。Gemini 在 src/ui/AppView.tsx 导出 AppView(props: AppViewProps)，保留 todo-input、todo-submit、todo-row、toggle-todo 选择器，提交前校验标题；新建任务默认调用 addTodo(title)，由 store 归入 inbox。依赖冻结类型、模板入口连接及 AC-PERSIST 的提交机制。",
+    "AC-CATEGORY": "Codex 实现 addCategory、renameCategory、deleteCategory，在 store 层拒绝空分类名并禁止删除 inbox。删除其他分类与将其全部任务转入 inbox 必须形成同一次状态提交，不丢失任务。Gemini 提供分类操作及 category-input、category-submit、category-column 选择器；每列 heading 的 accessible name 严格等于分类名，任务数量与操作按钮放在 heading 外，inbox 删除按钮隐藏或禁用。不要求列容器自身的 accessible name 等于分类名。依赖有效的 inbox、任务分类引用及统一持久化提交。",
+    "AC-DRAG": "Codex 严格实现 moveTodo(id, categoryId, beforeTodoId)：移到自身前无操作；其余移动在提交前验证任务和目标分类存在，非 null 的参照任务存在且属于目标分类，无效参数抛错且不改变状态。合法移动先移除任务、更新分类，再按 ID 定位并插入参照任务前；null 追加到目标分类末尾，支持空分类。排序使用 TodoState.todos 的数组顺序，不增加字段。Gemini 支持指针拖拽和键盘排序；列容器接受空分类及末尾放置并传 null，行放置传对应任务 ID，避免重复处理。键盘下移一位传原分类列表中下下项的 ID，不存在则传 null，已在末尾时不触发移动。依赖分类渲染及 AC-PERSIST，刷新后保持顺序。",
+    "AC-PERSIST": "Codex 沿用模板存储约定，通过注入的 Storage 保存完整 TodoState，useTodoApp 使用 localStorage。所有有效变更先构造并校验候选状态，写入成功后才发布状态并通知订阅者；写入失败保留原状态，通过现有 void 方法同步抛错。Gemini 在所有变更入口统一捕获异常，以组件本地 state 展示错误，失败时不显示成功或清空尚未提交的输入，不新增 lastError、字段或回调。依赖全部操作统一经过该机制；恢复内容包括分类、任务标题、完成状态、归属及顺序。",
+    "AC-RECOVER": "Codex 初始化时解析保存数据，并按冻结 TodoState 校验 version、categories、todos、元素字段、ID 唯一性、inbox 存在及任务分类引用有效性。无保存数据、JSON 损坏或解析成功但结构无效时，返回 version: 1、todos: [] 且包含 inbox 的有效空状态，后续仍可新增和保存。Gemini 正常渲染仅有 inbox、任务为空的状态，可提供非阻塞性的无任务占位。依赖冻结类型、模板存储约定及 AC-PERSIST；不新增恢复接口或修改冻结验收集。"
+  },
+  "collaboration": {
+    "notes": [
+      {
+        "id": "gemini-1",
+        "provider": "gemini",
+        "kind": "risk",
+        "text": "各分类列内 heading 的 accessible name 必须严格等于分类名称，UI 实现时不能将任务数量徽标、删除或编辑按钮等子元素嵌套在 heading 标签内，否则会污染 accessible name 导致测试失败；同时对内置 inbox 分类，UI 应隐藏或禁用删除按钮，防止触发非法删除操作。",
+        "acceptanceId": "AC-CATEGORY"
+      },
+      {
+        "id": "gemini-2",
+        "provider": "gemini",
+        "kind": "risk",
+        "text": "针对空分类列以及拖拽到列末尾的场景，category-column 容器自身必须作为合法的 drop target 并传递 beforeTodoId 为 null；此外，键盘排序向下移动时，由于 moveTodo 逻辑是先移除任务再插入到目标之前，UI 计算目标 beforeTodoId 时不能传相邻下一个任务，需定位到下下个任务的 ID（若已是末尾则为 null），否则会导致原地不动。",
+        "acceptanceId": "AC-DRAG"
+      },
+      {
+        "id": "gemini-3",
+        "provider": "gemini",
+        "kind": "risk",
+        "text": "根据边界约束，AppViewProps 禁止新增 lastError 等状态或回调，持久化失败由 store 方法同步抛错。UI 必须在 AppView 的所有操作触发点（如添加、修改、删除、移动）增加 try...catch 捕获异常，并使用组件本地 state 渲染错误提示，避免未捕获异常导致 React 组件崩溃或白屏。",
+        "acceptanceId": "AC-PERSIST"
+      },
+      {
+        "id": "gemini-4",
+        "provider": "gemini",
+        "kind": "suggestion",
+        "text": "todo-input 与 todo-submit 交互时，UI 应在提交前对标题进行 trim 校验，为空时禁用提交或拦截，避免触发无效操作；且需明确新建任务的 categoryId 策略，默认归属至当前聚焦/选中的分类或回退到 inbox，保证 todo-row 能在对应的 category-column 下稳定渲染。",
+        "acceptanceId": "AC-CRUD"
+      },
+      {
+        "id": "gemini-5",
+        "provider": "gemini",
+        "kind": "suggestion",
+        "text": "在初始空状态或由损坏 JSON 恢复时，UI 渲染 category-column 与 todo-row 需做好空数据防御（如 todos 为空数组、分类仅有 inbox），提供清晰的无任务占位显示，避免在渲染列表或按分类分组任务时出现空引用或布局错乱。",
+        "acceptanceId": "AC-RECOVER"
+      },
+      {
+        "id": "codex-1",
+        "provider": "codex",
+        "kind": "risk",
+        "text": "AC-CRUD 只明确由 UI 拒绝空标题；直接调用 store 的 addTodo、editTodo 也必须拒绝空标题，否则可绕过 UI 写入无效数据。",
+        "acceptanceId": "AC-CRUD"
+      },
+      {
+        "id": "codex-2",
+        "provider": "codex",
+        "kind": "risk",
+        "text": "AC-RECOVER 未明确校验解析成功但结构无效的存储数据。恢复时应验证 version、categories、todos 及 inbox；损坏的数据应回退到有效空态，避免渲染崩溃。",
+        "acceptanceId": "AC-RECOVER"
+      },
+      {
+        "id": "codex-3",
+        "provider": "codex",
+        "kind": "question",
+        "text": "计划依赖现有 src/App.tsx 已连接 useTodoApp 与 AppView，但该文件不可修改。需核对冻结模板确有这条连接，否则双方完成各自文件后应用仍无法运行。",
+        "acceptanceId": null
+      },
+      {
+        "id": "codex-4",
+        "provider": "codex",
+        "kind": "suggestion",
+        "text": "明确 useTodoApp 在重渲染期间复用同一个 store，并通过 subscribe 更新 state；否则操作后的 UI 可能不刷新，或重建 store 导致订阅失效。",
+        "acceptanceId": "AC-CRUD"
+      },
+      {
+        "id": "codex-5",
+        "provider": "codex",
+        "kind": "risk",
+        "text": "moveTodo 未说明 beforeTodoId 属于其他分类或不存在时的处理。应在提交前验证目标分类与参照任务，避免把任务插入错误位置并持久化无效顺序。",
+        "acceptanceId": "AC-DRAG"
+      }
+    ],
+    "decisions": [
+      {
+        "noteId": "gemini-1",
+        "disposition": "adopt",
+        "reason": "落实 AC-CATEGORY 的精确 heading 名称要求，将计数和操作按钮置于 heading 外。UI 隐藏或禁用 inbox 删除入口，store 同时强制禁止删除，防止绕过界面限制。"
+      },
+      {
+        "noteId": "gemini-2",
+        "disposition": "adopt",
+        "reason": "空分类和列末尾必须能接收 null 追加。下移一位使用原列表下下项作为参照，才能符合先移除再插入的语义；传相邻下一项会保持原顺序。全部沿用 moveTodo。"
+      },
+      {
+        "noteId": "gemini-3",
+        "disposition": "adopt",
+        "reason": "现有同步异常通道足以报告写入失败。所有变更入口捕获异常并使用 UI 本地状态显示错误，符合 AppViewProps 不可扩展的边界；store 写入失败时不发布候选状态。"
+      },
+      {
+        "noteId": "gemini-4",
+        "disposition": "adopt",
+        "reason": "采纳提交前 trim 校验和明确默认分类策略；统一默认 inbox，无需增加分类选择功能。store 仍独立校验，UI 校验不能替代数据层约束。"
+      },
+      {
+        "noteId": "gemini-5",
+        "disposition": "adopt",
+        "reason": "空任务数组和仅含 inbox 的分类数组都是合法状态，UI 必须能正常渲染。无任务占位作为可选体验，不升级为冻结验收之外的阻塞条件。"
+      },
+      {
+        "noteId": "codex-1",
+        "disposition": "adopt",
+        "reason": "空标题限制必须覆盖直接调用 addTodo、editTodo 的场景。store 在修改或写入前拒绝 trim 后为空的标题，保证有效状态不依赖 UI 校验。"
+      },
+      {
+        "noteId": "codex-2",
+        "disposition": "adopt",
+        "reason": "JSON 能解析不代表符合 TodoState。恢复时验证结构与必要引用约束，损坏数据统一回退到含 inbox 的有效空态，属于现有恢复要求的防御性实现。"
+      },
+      {
+        "noteId": "codex-3",
+        "disposition": "adopt",
+        "reason": "执行前只读核对冻结 src/App.tsx 确实连接 useTodoApp 与 AppView，并使用约定导出路径。本次未进行核对；若不符，报告模板集成阻塞，不授权任何 worker 修改入口或共享契约。"
+      },
+      {
+        "noteId": "codex-4",
+        "disposition": "adopt",
+        "reason": "useTodoApp 必须在重渲染期间复用 store，并通过 subscribe 获取更新、在卸载时清理订阅，避免状态不同步或订阅失效；实现完全位于 src/core/**。"
+      },
+      {
+        "noteId": "codex-5",
+        "disposition": "adopt",
+        "reason": "除移到自身前的无操作外，移动前校验目标分类和参照任务；参照不存在或属于其他分类时，通过现有异常通道拒绝且不写入，避免静默插入错误位置，无需扩展接口。"
+      }
+    ],
+    "coLeadOpinion": null,
+    "calls": [
+      {
+        "role": "primary_draft",
+        "provider": "codex",
+        "requestedModel": "gpt-6-astra",
+        "observedModel": null
+      },
+      {
+        "role": "ui_consult",
+        "provider": "agy",
+        "requestedModel": "gemini-3.8-flash-high",
+        "observedModel": "gemini-3.8-flash-high"
+      },
+      {
+        "role": "logic_consult",
+        "provider": "codex",
+        "requestedModel": "gpt-6-sol",
+        "observedModel": null
+      },
+      {
+        "role": "primary_final",
+        "provider": "codex",
+        "requestedModel": "gpt-6-astra",
+        "observedModel": null
+      }
+    ]
+  },
+  "planner": {
+    "provider": "codex",
+    "requestedModel": "gpt-6-astra",
+    "observedModel": null,
+    "effort": "max",
+    "basis": "available candidates + configured role preferences + dated evaluation evidence"
+  }
+}

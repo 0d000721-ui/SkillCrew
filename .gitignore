@@ -1,0 +1,12 @@
+node_modules/
+.skillcrew/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example
+*.log
+crew-state/
+todo-app/
+.DS_Store
+Thumbs.db

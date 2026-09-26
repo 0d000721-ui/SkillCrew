@@ -1,0 +1,518 @@
+{
+  "schemaVersion": 1,
+  "id": "8c1f99de-f19f-4143-b1e9-6179ad228f88",
+  "request": "做一个支持拖拽、分类和本地保存的待办应用。",
+  "plan": {
+    "schemaVersion": 1,
+    "projectType": "react-todo",
+    "request": "做一个支持拖拽、分类和本地保存的待办应用。",
+    "assumptions": [
+      "新建项目",
+      "数据仅保存在当前浏览器",
+      "单用户使用",
+      "React + TypeScript + Vite 固定技术栈"
+    ],
+    "features": [
+      "添加、编辑、删除和完成待办",
+      "创建和管理分类",
+      "分类内及跨分类拖拽排序",
+      "刷新后保留数据",
+      "异常存储恢复"
+    ],
+    "acceptanceIds": [
+      "AC-CRUD",
+      "AC-CATEGORY",
+      "AC-DRAG",
+      "AC-PERSIST",
+      "AC-RECOVER"
+    ],
+    "routing": {
+      "mode": "single",
+      "selection": "capability_catalog",
+      "snapshot": {
+        "checkedAt": "2026-09-26T01:57:46.355Z",
+        "primaryBasis": "available candidates + configured role preferences + dated evaluation evidence",
+        "webDevBasis": "https://arena.ai/leaderboard/code/webdev",
+        "rationale": "Preferences are explicit configuration, not independently measured global rankings."
+      },
+      "primary": {
+        "provider": "codex",
+        "model": "gpt-6-astra",
+        "role": "primary",
+        "effort": "max"
+      },
+      "coLead": null,
+      "ui": {
+        "provider": "agy",
+        "model": "gemini-3.8-flash-high",
+        "role": "ui"
+      },
+      "logic": {
+        "provider": "codex",
+        "model": "gpt-6-sol",
+        "role": "logic"
+      },
+      "reviewer": {
+        "provider": "agy",
+        "model": "claude-opus-4-6-thinking",
+        "role": "review"
+      },
+      "decisions": {
+        "primary": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "ui": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "logic": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations",
+        "review": "role preference=100; selection score=100.00; no benchmark score supplied; preference is not a leaderboard claim; delivery reliability=no observations"
+      },
+      "inventory": {
+        "agy": [
+          "gemini-3.8-flash-high",
+          "gemini-3.8-flash-medium",
+          "gemini-3.8-flash-low",
+          "gemini-3.7-flash-high",
+          "gemini-3.7-flash-medium",
+          "gemini-3.7-flash-low",
+          "gemini-3.6-flash-high",
+          "gemini-3.6-flash-medium",
+          "gemini-3.6-flash-low",
+          "gemini-3.1-pro-high",
+          "gemini-3.1-pro-low",
+          "claude-sonnet-4-6",
+          "claude-opus-4-6-thinking",
+          "gpt-oss-120b-medium"
+        ],
+        "codex": [
+          "gpt-6-astra",
+          "gpt-6-sol",
+          "gpt-6-luna",
+          "gpt-5.6-sol",
+          "gpt-5.6-terra",
+          "gpt-5.6-luna",
+          "gpt-5.5"
+        ],
+        "notes": [
+          "codex: installed CLI model cache; may be stale; served model remains unknown in JSONL",
+          "agy: live model listing"
+        ]
+      }
+    },
+    "skills": [
+      {
+        "id": "contract-planning",
+        "roles": [
+          "primary",
+          "co_lead",
+          "ui",
+          "logic"
+        ],
+        "phases": [
+          "plan"
+        ],
+        "content": "把需求映射到固定验收 ID，使用真实 TypeScript 接口。副模型提出具体风险或疑问，主模型逐条决定采纳或拒绝并解释理由。明确每项工作依赖与文件归属。",
+        "sha256": "b9bc22d59893b5c839d1c38efb35197fa4be9000993164e30d144a16eb194653",
+        "source": "builtin"
+      },
+      {
+        "id": "accessible-todo-ui",
+        "roles": [
+          "ui"
+        ],
+        "phases": [
+          "implement",
+          "repair"
+        ],
+        "content": "组件通过固定 AppViewProps 调用业务逻辑。提供清楚的标签、键盘可操作控件、空分类放置目标。检查拖拽后的显示与持久化顺序一致。捕获业务回调错误并显示可理解的反馈。只交付 UI 和样式。",
+        "sha256": "6d020df10a4055468b2835f6e8d992d71fe7c65e660c409fc67c4e3524e988d0",
+        "source": "builtin"
+      },
+      {
+        "id": "persistent-todo-state",
+        "roles": [
+          "logic"
+        ],
+        "phases": [
+          "implement",
+          "repair"
+        ],
+        "content": "按照固定 TodoStore 接口实现状态与存储。覆盖同分类和跨分类排序、坏 JSON/无效数据恢复、写入失败。保持事务一致性，不吞掉需要 UI 展示的存储错误。只交付逻辑文件。",
+        "sha256": "0e382c81165829da7d06d0e03d407140e73b5262120d90ec534f64ad1126f94e",
+        "source": "builtin"
+      },
+      {
+        "id": "evidence-based-repair",
+        "roles": [
+          "primary",
+          "ui",
+          "logic"
+        ],
+        "phases": [
+          "repair"
+        ],
+        "content": "以失败测试、具体源码和可复现审查问题定位原因。修复任务标明文件、原因、预期结果和验证点。保留已通过的行为，不修改固定测试或契约。若须扩展接口或处理环境故障，提出阻塞，禁止声称未执行的测试通过。",
+        "sha256": "0ae25b3c726ea4cb7f3eff1cdcc0fc9f168db0ce5ed1c4b58fd6a926ffa2a64d",
+        "source": "builtin"
+      },
+      {
+        "id": "independent-review",
+        "roles": [
+          "review"
+        ],
+        "phases": [
+          "review"
+        ],
+        "content": "以独立会话检查固定验收条件。每项问题有源码文件、预期、实际和复现步骤。只有影响固定验收或正确性的缺陷列 high；未要求的装饰性体验不能升级为阻塞条件。未经亲自复现，明确标记 proposed。",
+        "sha256": "3aace8cc39cfc0cb22c521017860bb211adb1aa62ae6947536d74d632ba7277b",
+        "source": "builtin"
+      }
+    ],
+    "summary": "按 react-todo@1.0.1 冻结契约完成最终计划。Codex 仅负责 src/core/**，Gemini 仅负责 src/ui/**、src/styles/**；共同依赖只读的 src/contracts/index.ts，不修改 src/App.tsx、共享类型、依赖或 tests/**，不扩展 AppViewProps。执行前只读核对模板入口连接，验收由 runner 执行原有冻结测试。空态占位、确认框、动画和插入提示不新增为阻塞验收条件。本次仅制定计划，未修改文件或执行验证。",
+    "acceptanceMapping": {
+      "AC-CRUD": "Codex 在 src/core/store.ts 导出 createTodoStore(storage: Storage): TodoStore，实现 getState、subscribe 及任务增删改、完成状态切换；addTodo、editTodo 均在 store 层拒绝 trim 后为空的标题。src/core/useTodoApp.ts 导出 useTodoApp(): AppViewProps，重渲染时复用同一 store，通过 subscribe 更新界面并清理订阅。Gemini 在 src/ui/AppView.tsx 导出 AppView(props: AppViewProps)，保留 todo-input、todo-submit、todo-row、toggle-todo 选择器，提交前校验标题；新建任务默认调用 addTodo(title)，由 store 归入 inbox。依赖冻结类型、模板入口连接及 AC-PERSIST 的提交机制。",
+      "AC-CATEGORY": "Codex 实现 addCategory、renameCategory、deleteCategory，在 store 层拒绝空分类名并禁止删除 inbox。删除其他分类与将其全部任务转入 inbox 必须形成同一次状态提交，不丢失任务。Gemini 提供分类操作及 category-input、category-submit、category-column 选择器；每列 heading 的 accessible name 严格等于分类名，任务数量与操作按钮放在 heading 外，inbox 删除按钮隐藏或禁用。不要求列容器自身的 accessible name 等于分类名。依赖有效的 inbox、任务分类引用及统一持久化提交。",
+      "AC-DRAG": "Codex 严格实现 moveTodo(id, categoryId, beforeTodoId)：移到自身前无操作；其余移动在提交前验证任务和目标分类存在，非 null 的参照任务存在且属于目标分类，无效参数抛错且不改变状态。合法移动先移除任务、更新分类，再按 ID 定位并插入参照任务前；null 追加到目标分类末尾，支持空分类。排序使用 TodoState.todos 的数组顺序，不增加字段。Gemini 支持指针拖拽和键盘排序；列容器接受空分类及末尾放置并传 null，行放置传对应任务 ID，避免重复处理。键盘下移一位传原分类列表中下下项的 ID，不存在则传 null，已在末尾时不触发移动。依赖分类渲染及 AC-PERSIST，刷新后保持顺序。",
+      "AC-PERSIST": "Codex 沿用模板存储约定，通过注入的 Storage 保存完整 TodoState，useTodoApp 使用 localStorage。所有有效变更先构造并校验候选状态，写入成功后才发布状态并通知订阅者；写入失败保留原状态，通过现有 void 方法同步抛错。Gemini 在所有变更入口统一捕获异常，以组件本地 state 展示错误，失败时不显示成功或清空尚未提交的输入，不新增 lastError、字段或回调。依赖全部操作统一经过该机制；恢复内容包括分类、任务标题、完成状态、归属及顺序。",
+      "AC-RECOVER": "Codex 初始化时解析保存数据，并按冻结 TodoState 校验 version、categories、todos、元素字段、ID 唯一性、inbox 存在及任务分类引用有效性。无保存数据、JSON 损坏或解析成功但结构无效时，返回 version: 1、todos: [] 且包含 inbox 的有效空状态，后续仍可新增和保存。Gemini 正常渲染仅有 inbox、任务为空的状态，可提供非阻塞性的无任务占位。依赖冻结类型、模板存储约定及 AC-PERSIST；不新增恢复接口或修改冻结验收集。"
+    }
+  },
+  "outputDir": "C:\\Users\\Administrator\\Documents\\Codex\\2026-09-26\\skillcrew-ai-claude-gemini-codex-ai\\work\\v02-repair-live\\todo",
+  "status": "ready",
+  "contractHash": "def8e02ae9ed401d8b8dfe5098f841f2f485487445e6887cd5fc914290c2591a",
+  "templateHash": "61ff2cd0526c3a63d2075c1fe0534e77ecc946bcc8cec89ea2ee4c126c55f749",
+  "completed": [
+    "plan",
+    "freeze",
+    "ui",
+    "logic",
+    "integrate",
+    "check",
+    "review",
+    "ready"
+  ],
+  "events": [
+    {
+      "time": "2026-09-26T02:16:48.171Z",
+      "stage": "plan",
+      "message": "需求已限定为 react-todo；等待模型规划和验收映射。"
+    },
+    {
+      "time": "2026-09-26T02:16:48.181Z",
+      "stage": "plan",
+      "message": "规划已写入，覆盖 5 条验收。"
+    },
+    {
+      "time": "2026-09-26T02:16:48.309Z",
+      "stage": "freeze",
+      "message": "接口与模板已冻结：def8e02ae9ed"
+    },
+    {
+      "time": "2026-09-26T02:16:48.837Z",
+      "stage": "worker_start",
+      "message": "agy / gemini-3.8-flash-high 开始 gemini，第 0 轮。"
+    },
+    {
+      "time": "2026-09-26T02:16:48.837Z",
+      "stage": "worker_start",
+      "message": "codex / gpt-6-sol 开始 codex，第 0 轮。"
+    },
+    {
+      "time": "2026-09-26T02:16:48.887Z",
+      "stage": "checkpoint",
+      "message": "gemini 已通过文件归属检查，保存检查点。"
+    },
+    {
+      "time": "2026-09-26T02:16:48.889Z",
+      "stage": "checkpoint",
+      "message": "codex 已通过文件归属检查，保存检查点。"
+    },
+    {
+      "time": "2026-09-26T02:16:49.121Z",
+      "stage": "integrate",
+      "message": "交付已集成，源码哈希 25f1a99a45ff。"
+    },
+    {
+      "time": "2026-09-26T02:16:49.130Z",
+      "stage": "check",
+      "message": "执行安装、类型检查、构建、单元测试和浏览器测试。"
+    },
+    {
+      "time": "2026-09-26T02:16:53.620Z",
+      "stage": "check",
+      "message": "机器验收未通过，进入问题定位。"
+    },
+    {
+      "time": "2026-09-26T02:16:53.635Z",
+      "stage": "triage",
+      "message": "主模型根据实际失败证据分配修复任务。"
+    },
+    {
+      "time": "2026-09-26T02:17:58.519Z",
+      "stage": "repair",
+      "message": "第 1 轮定向修复：typecheck 报告 src/core/store.ts(192,14) TS2322，与源码末尾将字符串赋给 number 的声明一致。问题可在 Codex 所有权范围内修复，无需变更冻结接口。"
+    },
+    {
+      "time": "2026-09-26T02:17:58.522Z",
+      "stage": "repair",
+      "message": "第 1 轮：codex。"
+    },
+    {
+      "time": "2026-09-26T02:17:58.994Z",
+      "stage": "worker_start",
+      "message": "codex / gpt-6-sol 开始 codex，第 1 轮。"
+    },
+    {
+      "time": "2026-09-26T02:18:47.376Z",
+      "stage": "checkpoint",
+      "message": "codex 已通过文件归属检查，保存检查点。"
+    },
+    {
+      "time": "2026-09-26T02:18:47.575Z",
+      "stage": "integrate",
+      "message": "交付已集成，源码哈希 e3662fbcc785。"
+    },
+    {
+      "time": "2026-09-26T02:18:47.584Z",
+      "stage": "check",
+      "message": "执行安装、类型检查、构建、单元测试和浏览器测试。"
+    },
+    {
+      "time": "2026-09-26T02:19:02.755Z",
+      "stage": "check",
+      "message": "机器验收通过，等待独立审查。"
+    },
+    {
+      "time": "2026-09-26T02:19:02.762Z",
+      "stage": "review",
+      "message": "启动独立审查会话。"
+    },
+    {
+      "time": "2026-09-26T02:20:45.837Z",
+      "stage": "review",
+      "message": "0 个问题；0 个阻塞问题；状态 ready。"
+    }
+  ],
+  "dialogue": [],
+  "workerResults": {
+    "gemini": {
+      "provider": "agy",
+      "complete": true,
+      "model": null,
+      "usage": null,
+      "eventCount": 0,
+      "summary": "verification fixture; not a fresh model call",
+      "requestedModel": "gemini-3.8-flash-high",
+      "status": "accepted",
+      "changes": [
+        {
+          "path": "src/styles/app.css",
+          "sha256": "173c6b114c6ba578b9fe7c47da817dfde57bb1b958f9408517f28ae0e75cd149"
+        },
+        {
+          "path": "src/ui/AppView.tsx",
+          "sha256": "0c5537b325740dced376e376e54527075a8013c05bbd32c03cd9e60ac7f7c5db"
+        }
+      ]
+    },
+    "codex": {
+      "provider": "codex",
+      "complete": true,
+      "model": null,
+      "summary": "{\"status\":\"completed\",\"summary\":\"已从 src/core/store.ts 删除导致 TS2322 的无业务用途声明，保留现有存储逻辑和冻结签名。未执行验证；由 runner 报告结果。\",\"question\":null}",
+      "usage": {
+        "input_tokens": 32651,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2019,
+        "reasoning_output_tokens": 126
+      },
+      "eventCount": 4,
+      "requestedModel": "gpt-6-sol",
+      "status": "accepted",
+      "changes": [
+        {
+          "path": "src/core/store.ts",
+          "sha256": "c21e6918af34bceb40c9ec5e04b1ad60ef73c9a138352ee139fdae6b3676b4d3"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "install",
+      "exitCode": 0,
+      "count": 0,
+      "requiredCount": 0,
+      "passed": true,
+      "output": "\nadded 116 packages in 2s\n\n",
+      "mode": "local",
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "image": null,
+      "durationMs": 1820,
+      "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+    },
+    {
+      "id": "typecheck",
+      "exitCode": 0,
+      "count": 0,
+      "requiredCount": 0,
+      "passed": true,
+      "output": "\n",
+      "mode": "local",
+      "command": "node ./node_modules/typescript/bin/tsc --noEmit",
+      "image": null,
+      "durationMs": 2537,
+      "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+    },
+    {
+      "id": "build",
+      "exitCode": 0,
+      "count": 0,
+      "requiredCount": 0,
+      "passed": true,
+      "output": "vite v6.3.5 building for production...\ntransforming...\n✓ 32 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.40 kB │ gzip:  0.28 kB\ndist/assets/index-B1Sx81oW.css    5.48 kB │ gzip:  1.64 kB\ndist/assets/index-DABRze6h.js   198.28 kB │ gzip: 62.34 kB\n✓ built in 1.03s\n\n",
+      "mode": "local",
+      "command": "node ./node_modules/vite/bin/vite.js build",
+      "image": null,
+      "durationMs": 1904,
+      "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+    },
+    {
+      "id": "unit",
+      "exitCode": 0,
+      "count": 6,
+      "requiredCount": 6,
+      "passed": true,
+      "output": "\n RUN  v3.2.4 D:/ProgramData/DevData/Temp/skillcrew-check-8xGti6/app\n\n ✓ tests/store.test.ts (6 tests) 6ms\n\n Test Files  1 passed (1)\n      Tests  6 passed (6)\n   Start at  10:18:55\n   Duration  659ms (transform 44ms, setup 0ms, collect 56ms, tests 6ms, environment 0ms, prepare 326ms)\n\n\n",
+      "mode": "local",
+      "command": "node ./node_modules/vitest/vitest.mjs run",
+      "image": null,
+      "durationMs": 1994,
+      "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+    },
+    {
+      "id": "browser",
+      "exitCode": 0,
+      "count": 2,
+      "requiredCount": 2,
+      "passed": true,
+      "output": "\nRunning 2 tests using 1 worker\n··\n  2 passed (2.2s)\n\n",
+      "mode": "local",
+      "command": "node ./node_modules/@playwright/test/cli.js test",
+      "image": null,
+      "durationMs": 6763,
+      "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+    }
+  ],
+  "verificationPassed": true,
+  "review": {
+    "issues": [],
+    "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+    "provider": "agy",
+    "requestedModel": "claude-opus-4-6-thinking",
+    "observedModel": "claude-opus-4-6-thinking"
+  },
+  "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+  "error": null,
+  "createdAt": "2026-09-26T02:16:48.171Z",
+  "updatedAt": "2026-09-26T02:20:45.839Z",
+  "freezePreparation": {
+    "templateHash": "61ff2cd0526c3a63d2075c1fe0534e77ecc946bcc8cec89ea2ee4c126c55f749",
+    "contractHash": "def8e02ae9ed401d8b8dfe5098f841f2f485487445e6887cd5fc914290c2591a"
+  },
+  "workflow": {
+    "maxRepairRounds": 2,
+    "verification": "local"
+  },
+  "execution": {
+    "schemaVersion": 1,
+    "phase": "complete",
+    "maxRepairRounds": 2,
+    "reusedWorkers": 0,
+    "cycle": {
+      "round": 1,
+      "inputHash": "25f1a99a45ff73d635da24a7d5927b2aceab41536c1c43e4b279e961da327afa",
+      "owners": [
+        "codex"
+      ],
+      "feedback": {
+        "action": "repair",
+        "reason": "typecheck 报告 src/core/store.ts(192,14) TS2322，与源码末尾将字符串赋给 number 的声明一致。问题可在 Codex 所有权范围内修复，无需变更冻结接口。",
+        "tasks": [
+          {
+            "owner": "codex",
+            "instructions": "仅修改 src/core/store.ts：删除末尾无业务用途的 `export const skillcrewInjectedTypeFault: number = 'injected fault';`。该声明直接导致已报告的 TS2322。保留 createTodoStore 的冻结签名及现有业务逻辑，不修改其他文件，不使用类型断言或忽略指令掩盖错误。预期：消除该编译阻塞，保持现有行为。验证：重新执行 `node ./node_modules/typescript/bin/tsc --noEmit`，确认退出码为 0；由 runner 执行原有冻结验收测试并报告实际结果，不修改测试或验收要求。"
+          }
+        ]
+      },
+      "checkpoints": {
+        "codex": {
+          "directoryName": "a2cf5940-1569-48ed-b305-6dc9bb7ce2f3",
+          "inputHash": "25f1a99a45ff73d635da24a7d5927b2aceab41536c1c43e4b279e961da327afa",
+          "contractHash": "def8e02ae9ed401d8b8dfe5098f841f2f485487445e6887cd5fc914290c2591a",
+          "routeKey": "[\"codex\",\"gpt-6-sol\",null,\"logic\"]",
+          "treeHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+          "result": {
+            "provider": "codex",
+            "complete": true,
+            "model": null,
+            "summary": "{\"status\":\"completed\",\"summary\":\"已从 src/core/store.ts 删除导致 TS2322 的无业务用途声明，保留现有存储逻辑和冻结签名。未执行验证；由 runner 报告结果。\",\"question\":null}",
+            "usage": {
+              "input_tokens": 32651,
+              "cached_input_tokens": 0,
+              "cache_write_input_tokens": 0,
+              "output_tokens": 2019,
+              "reasoning_output_tokens": 126
+            },
+            "eventCount": 4
+          }
+        }
+      },
+      "integration": {
+        "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4"
+      }
+    },
+    "history": [
+      {
+        "round": 0,
+        "sourceHash": "25f1a99a45ff73d635da24a7d5927b2aceab41536c1c43e4b279e961da327afa",
+        "checks": [
+          {
+            "id": "install",
+            "exitCode": 0,
+            "count": 0,
+            "requiredCount": 0,
+            "passed": true,
+            "output": "\nadded 116 packages in 2s\n\n",
+            "mode": "local",
+            "command": "npm ci --ignore-scripts --no-audit --no-fund",
+            "image": null,
+            "durationMs": 1758,
+            "sourceHash": "25f1a99a45ff73d635da24a7d5927b2aceab41536c1c43e4b279e961da327afa"
+          },
+          {
+            "id": "typecheck",
+            "exitCode": 2,
+            "count": 0,
+            "requiredCount": 0,
+            "passed": false,
+            "output": "src/core/store.ts(192,14): error TS2322: Type 'string' is not assignable to type 'number'.\r\n\n",
+            "mode": "local",
+            "command": "node ./node_modules/typescript/bin/tsc --noEmit",
+            "image": null,
+            "durationMs": 2566,
+            "sourceHash": "25f1a99a45ff73d635da24a7d5927b2aceab41536c1c43e4b279e961da327afa"
+          }
+        ],
+        "review": null,
+        "decision": {
+          "action": "repair",
+          "reason": "typecheck 报告 src/core/store.ts(192,14) TS2322，与源码末尾将字符串赋给 number 的声明一致。问题可在 Codex 所有权范围内修复，无需变更冻结接口。",
+          "tasks": [
+            {
+              "owner": "codex",
+              "instructions": "仅修改 src/core/store.ts：删除末尾无业务用途的 `export const skillcrewInjectedTypeFault: number = 'injected fault';`。该声明直接导致已报告的 TS2322。保留 createTodoStore 的冻结签名及现有业务逻辑，不修改其他文件，不使用类型断言或忽略指令掩盖错误。预期：消除该编译阻塞，保持现有行为。验证：重新执行 `node ./node_modules/typescript/bin/tsc --noEmit`，确认退出码为 0；由 runner 执行原有冻结验收测试并报告实际结果，不修改测试或验收要求。"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+[模型分工] 默认自动分配 · 双主模型
+  主模型：codex/gpt-6-astra (max)；规划、关键澄清与最终裁决
+  第二主模型：agy/claude-opus-4-6-thinking；独立检查架构与验收遗漏，向主模型提出意见
+  UI 副模型：agy/gemini-3.8-flash-high；页面、样式与交互
+  逻辑副模型：codex/gpt-6-sol；状态、存储与业务逻辑
+  独立审查：agy/claude-opus-4-6-thinking；新会话检查交付与验收证据
+  选择依据：可用候选、已配置的角色能力与有效评测；详细依据见运行报告。

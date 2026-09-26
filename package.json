@@ -1,0 +1,16 @@
+{
+  "name": "skillcrew",
+  "version": "0.2.0-alpha.2",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "bin": { "skillcrew": "./bin/skillcrew.mjs" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node ./node_modules/typescript/bin/tsc -p tsconfig.json && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.10.4",
+    "typescript": "5.9.3"
+  }
+}

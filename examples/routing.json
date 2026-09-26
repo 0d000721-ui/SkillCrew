@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "models": [
+    {
+      "provider": "agy",
+      "model": "claude-opus-4-6-thinking",
+      "roles": {
+        "primary": 95,
+        "co_lead": 100,
+        "ui": 65,
+        "logic": 85,
+        "review": 100
+      }
+    },
+    {
+      "provider": "agy",
+      "model": "gemini-3.8-flash-high",
+      "roles": {
+        "ui": 100,
+        "logic": 55
+      }
+    },
+    {
+      "provider": "codex",
+      "model": "gpt-6-astra",
+      "roles": {
+        "primary": 100,
+        "co_lead": 100,
+        "ui": 85,
+        "logic": 95,
+        "review": 95
+      }
+    },
+    {
+      "provider": "codex",
+      "model": "gpt-6-sol",
+      "roles": {
+        "primary": 80,
+        "co_lead": 80,
+        "ui": 80,
+        "logic": 100,
+        "review": 80
+      }
+    }
+  ]
+}

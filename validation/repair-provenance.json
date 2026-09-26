@@ -1,0 +1,12 @@
+{
+  "runId": "8c1f99de-f19f-4143-b1e9-6179ad228f88",
+  "sourceRunId": "1a1f268d-4440-44e9-a42f-0a183acefc4d",
+  "initialGeneration": "reused exact worker source from ready run; no fresh initial worker calls",
+  "fault": "export const skillcrewInjectedTypeFault: number = 'injected fault';",
+  "realModelStages": [
+    "primary repair triage",
+    "owner-specific code repair",
+    "fresh independent review"
+  ],
+  "verification": "actual local install/typecheck/build/unit/browser"
+}

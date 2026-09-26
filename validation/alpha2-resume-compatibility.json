@@ -1,0 +1,11 @@
+{
+  "runId": "1a1f268d-4440-44e9-a42f-0a183acefc4d",
+  "previousVersion": "0.2.0-alpha.1",
+  "status": "ready",
+  "mode": "single",
+  "routeUnchanged": true,
+  "contractHash": "4af1397b2e63cabaca78240fd536b2b3e80eb97dadd15e9cb1fc7d77640e279d",
+  "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+  "inferenceCalls": 0,
+  "method": "Actual CLI resume of an existing ready run; integrity checked, no inference phase entered."
+}
