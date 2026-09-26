@@ -1,15 +1,16 @@
 {
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "executorTests": {
-    "passed": 73,
-    "failed": 0
+    "failed": 0,
+    "log": "alpha3-executor-tests.txt",
+    "passed": 85
   },
   "main": {
     "id": "1a1f268d-4440-44e9-a42f-0a183acefc4d",
     "status": "ready",
     "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
     "started": "2026-09-26T01:57:46.357Z",
-    "updated": "2026-09-26T02:20:21.250Z",
+    "updated": "2026-09-26T02:20:21.25Z",
     "rounds": 0,
     "reusedWorkers": 1,
     "checks": [
@@ -255,5 +256,17 @@
     "planning": "Default dual route tested with injected model replies; no new live dual workflow.",
     "hostChoice": "Implemented in host SKILL instructions; no new interactive host session tested.",
     "compatibility": "alpha2-resume-compatibility.json"
+  },
+  "systemLanguage": {
+    "hostDialogue": "Skill instruction updated; no new interactive host session tested.",
+    "independentReview": "Async CLI error localization fixed and verified. Legacy baseline planning cache and frozen hashes verified.",
+    "compatibility": "alpha3-language-compatibility.json",
+    "supported": [
+      "zh-CN",
+      "en"
+    ],
+    "platform": "Windows actual; macOS/Linux injected resolver inputs only.",
+    "modelCalls": "Injected replies for language propagation; no new live inference.",
+    "tests": 12
   }
 }

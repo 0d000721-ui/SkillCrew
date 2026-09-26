@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0-alpha.3",
+  "checkedAt": "2026-09-26T03:33:46.264Z",
+  "actualSystemDetection": {
+    "locale": "zh-CN",
+    "language": "zh-CN",
+    "source": "system",
+    "fallback": false,
+    "supportedLanguages": [
+      "zh-CN",
+      "en"
+    ],
+    "choices": {
+      "automatic": "默认自动分配（推荐）",
+      "manual": "手动指定模型"
+    },
+    "skillDescription": "使用 agycli 与 Codex 构建 React 待办应用，协调主副模型、Skill、实际测试、断点恢复和定向修复。",
+    "argumentHint": "\"待办需求\" | status <run-id> | resume <run-id> | doctor"
+  },
+  "runId": "1a1f268d-4440-44e9-a42f-0a183acefc4d",
+  "previousImplementationVersion": "0.2.0-alpha.1",
+  "status": "ready",
+  "responseLanguageAddedToLegacyPlan": false,
+  "planUnchanged": true,
+  "routeUnchanged": true,
+  "contractHash": "4af1397b2e63cabaca78240fd536b2b3e80eb97dadd15e9cb1fc7d77640e279d",
+  "sourceHash": "e3662fbcc785358b5cfbb5c14f7fdecbe9cfe75fc65de3d26718206c8c8226b4",
+  "evidenceUnchanged": true,
+  "displayedLanguages": [
+    "en",
+    "zh-CN"
+  ],
+  "inferenceCalls": 0,
+  "method": "Actual CLI resume of the existing ready run in both languages; provider executable paths intentionally unavailable; saved plan, events, worker results, checks, review and hashes compared unchanged.",
+  "limits": [
+    "No new live model workflow.",
+    "No interactive host conversation tested.",
+    "macOS/Linux locale branches tested with injected inputs, not on those operating systems."
+  ]
+}

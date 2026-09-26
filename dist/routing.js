@@ -1,3 +1,4 @@
+import { diagnostic, text } from './i18n.js';
 // Availability takes precedence over a leaderboard: these IDs were listed by agy models.
 export const RANKING_SNAPSHOT = {
     checkedAt: '2026-09-26',
@@ -12,19 +13,19 @@ export function routingAssignments(routing) {
         { label: 'UI 副模型', route: routing.ui, work: '页面、样式与交互' },
         { label: '逻辑副模型', route: routing.logic, work: '状态、存储与业务逻辑' },
         { label: '独立审查', route: routing.reviewer, work: '新会话检查交付与验收证据' },
-    ];
+    ].map(item => ({ ...item, label: text(item.label), work: text(item.work) }));
 }
 export function routingSummary(routing) {
     const method = routing.selection === 'user_override' ? '手动指定角色，其余自动分配' : routing.requestedMode === 'auto' ? '默认自动分配' : '已保存的模型分工';
-    const lines = [`[模型分工] ${method} · ${routing.mode === 'dual' ? '双主模型' : '单主模型'}`];
+    const lines = [`[${text('模型分工')}] ${text(method)} · ${text(routing.mode === 'dual' ? '双主模型' : '单主模型')}`];
     for (const { label, route, work } of routingAssignments(routing)) {
-        lines.push(`  ${label}：${route ? `${route.provider}/${route.model}${route.effort ? ` (${route.effort})` : ''}；${work}` : '未启用'}`);
+        lines.push(`  ${label}: ${route ? `${route.provider}/${route.model}${route.effort ? ` (${route.effort})` : ''}; ${work}` : text('未启用')}`);
     }
     if (routing.selection === 'capability_catalog' || routing.selection === 'user_override') {
-        lines.push('  选择依据：可用候选、已配置的角色能力与有效评测；详细依据见运行报告。');
+        lines.push('  ' + text('选择依据：可用候选、已配置的角色能力与有效评测；详细依据见运行报告。'));
     }
     for (const notice of routing.notices ?? [])
-        lines.push(`  说明：${notice}`);
+        lines.push(`  ${text('说明')}: ${diagnostic(notice)}`);
     return lines.join('\n') + '\n';
 }
 // Offline compatibility for older programmatic callers. User-facing CLI commands

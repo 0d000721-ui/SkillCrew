@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import type { RoutingPolicy } from './routing.js';
 import type { SkillSnapshot } from './skills.js';
+import type { DisplayLanguage } from './i18n.js';
 
 export interface AdvisorNote {
   id: string;
@@ -25,6 +26,7 @@ export interface Plan {
   schemaVersion: 1;
   projectType: 'react-todo';
   request: string;
+  responseLanguage?: DisplayLanguage;
   assumptions: string[];
   features: string[];
   acceptanceIds: string[];

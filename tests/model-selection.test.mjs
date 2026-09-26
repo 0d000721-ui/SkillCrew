@@ -7,6 +7,7 @@ import { DEFAULT_CATALOG, selectRouting } from '../dist/model-catalog.js';
 import { createRun } from '../dist/run-store.js';
 import { runPlanning } from '../dist/planning.js';
 import { renderReport } from '../dist/report.js';
+import { resolveLocale, withLocale } from '../dist/i18n.js';
 
 const inventory = { agy: ['claude-opus-4-6-thinking', 'gemini-3.8-flash-high'], codex: ['gpt-6-astra', 'gpt-6-sol'] };
 
@@ -79,7 +80,7 @@ test('report worker labels remain accurate when UI and logic swap providers', as
     gemini: { status: 'accepted', provider: 'codex', requestedModel: 'gpt-6-sol', model: null, changes: [] },
     codex: { status: 'accepted', provider: 'agy', requestedModel: 'claude-opus-4-6-thinking', model: 'claude-opus-4-6-thinking', changes: [] },
   };
-  const report = renderReport(state);
+  const report = withLocale(resolveLocale('zh-CN'), () => renderReport(state));
   assert.match(report, /\| UI \| accepted \| gpt-6-sol/);
   assert.match(report, /\| 逻辑 \| accepted \| claude-opus-4-6-thinking/);
 });

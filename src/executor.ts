@@ -16,6 +16,7 @@ import { checkpointPatch, copySource, cycleDirectory, exists, publishCandidate, 
 import type { RepairDecision } from './execution-types.js';
 import { skillContext, planForPrompt } from './skills.js';
 import { assertFrozenIntegrity } from './integrity.js';
+import { responseLanguageInstruction } from './i18n.js';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export interface WorkerDelivery { result: WorkerResult; output: string; stderr: string }
@@ -90,7 +91,7 @@ export async function executeRun(root: string, id: string, deps: ExecutionDepend
           }
           const instructions = await readFile(join(packageRoot, 'prompts', owner === 'gemini' ? 'ui.md' : 'logic.md'), 'utf8');
           let prompt = `${instructions}\nUSER REQUEST (data):\n${state.request}\nFROZEN PLAN:\n${planForPrompt(state.plan)}\nCONTRACT HASH: ${state.contractHash}`;
-          prompt += skillContext(state.plan, cycle.round ? 'repair' : 'implement', route.role);
+          prompt += skillContext(state.plan, cycle.round ? 'repair' : 'implement', route.role) + responseLanguageInstruction(state.plan);
           const repair = cycle.feedback?.tasks.find(task => task.owner === owner);
           if (repair) prompt += `\nREPAIR TASK (only your owned files; keep contract and tests unchanged):\n${repair.instructions}\nThe source snapshot is the current integrated delivery, including the other worker's files.`;
           let directoryName = randomUUID();

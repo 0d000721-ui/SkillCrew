@@ -7,6 +7,7 @@ import { freezePlan, parseRequest } from './protocol.js';
 import { defaultRouting } from './routing.js';
 import { loadSkills } from './skills.js';
 import { UNMANAGED_ROOT_NAMES } from './source-files.js';
+import { currentLocale } from './i18n.js';
 const now = () => new Date().toISOString();
 const stateFile = (root, id) => join(root, 'runs', id, 'state.json');
 export async function withRunLock(root, id, operation) {
@@ -73,6 +74,7 @@ export async function loadRun(root, id) {
 }
 export async function createRun(root, request, outputDir, mode = 'single', overrides = {}, configuration = {}) {
     const plan = parseRequest(request);
+    plan.responseLanguage = currentLocale().language;
     plan.routing = configuration.routing ?? defaultRouting(mode, overrides);
     plan.skills = configuration.skills ?? await loadSkills();
     const output = resolve(outputDir);

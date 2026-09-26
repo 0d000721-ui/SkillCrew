@@ -8,6 +8,7 @@ import { defaultRouting, type LeadMode, type RouteOverrides, type RoutingPolicy 
 import type { ExecutionState, RepairDecision } from './execution-types.js';
 import { loadSkills, type SkillSnapshot } from './skills.js';
 import { UNMANAGED_ROOT_NAMES } from './source-files.js';
+import { currentLocale } from './i18n.js';
 
 export interface PlanProposal {
   summary: string;
@@ -110,6 +111,7 @@ export async function loadRun(root: string, id: string): Promise<RunState> {
 
 export async function createRun(root: string, request: string, outputDir: string, mode: LeadMode = 'single', overrides: RouteOverrides = {}, configuration: { routing?: RoutingPolicy; skills?: SkillSnapshot[] } = {}): Promise<RunState> {
   const plan = parseRequest(request);
+  plan.responseLanguage = currentLocale().language;
   plan.routing = configuration.routing ?? defaultRouting(mode, overrides);
   plan.skills = configuration.skills ?? await loadSkills();
   const output = resolve(outputDir);

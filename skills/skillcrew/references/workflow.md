@@ -1,5 +1,7 @@
 # Workflow boundaries
 
+Read `locale` at invocation startup. Follow its effective language for dialogue, choices, progress and report explanations; pass an explicit user preference with `--lang`. New runs preserve their model response language in the frozen plan. Presentation changes must not rewrite requests, evidence, JSON protocol fields or old planning checkpoints.
+
 Order: plan → freeze → parallel workers → integrate → checks → independent review → ready. Code failures/high review issues go through primary triage → owner-specific repair → full checks → fresh review. Default repair limit is two; resume cannot reset it.
 
 Resolve the user's automatic/manual model preference once per conversation, reusing existing instructions. Auto is the CLI default: choose a capable primary and a distinct co-lead, falling back to single only when the latter is unavailable. Explicit choices take priority; contradictory or unavailable choices fail. Show actual assignments before inference calls and keep them frozen on resume.

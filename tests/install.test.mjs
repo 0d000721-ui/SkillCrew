@@ -43,7 +43,7 @@ test('agy project installer copies a standalone skill/runtime without overwritin
   const repeat = spawnSync(process.execPath, [installer, '--project', root], { encoding: 'utf8' });
   assert.equal(repeat.status, 2);
   assert.ok((await stat(runtime)).isFile());
-  assert.match(await readFile(join(skillRoot, 'SKILL.md'), 'utf8'), /冻结接口/);
+  assert.equal(await readFile(join(skillRoot, 'LICENSE'), 'utf8'), await readFile(fileURLToPath(new URL('../LICENSE', import.meta.url)), 'utf8'));
 });
 
 test('optional Claude host remains installable', async () => {

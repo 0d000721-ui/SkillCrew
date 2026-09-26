@@ -2,14 +2,15 @@ import { cp, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promis
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { diagnostic, languageArguments, localePresentation, text, withLocale } from '../dist/i18n.js';
 
 const packageRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const args = process.argv.slice(2);
+async function install(args) {
 const option = name => { const index = args.indexOf(name); return index >= 0 ? args[index + 1] : undefined; };
 const user = args.includes('--user'), project = option('--project'), host = option('--host') ?? 'agy';
 const exists = async path => { try { await stat(path); return true; } catch (error) { if (error?.code === 'ENOENT') return false; throw error; } };
 if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
-  process.stderr.write('用法：node scripts/install.mjs --project PATH | --user [--host agy|claude] [--dry-run]\n');
+  process.stderr.write(text('用法') + ': node scripts/install.mjs --project PATH | --user [--host agy|claude] [--dry-run] [--lang auto|en|zh-CN]\n');
   process.exitCode = 1;
 } else {
   const base = user ? homedir() : resolve(project);
@@ -19,7 +20,7 @@ if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
   const stagedSkill = skill + '.installing', stagedAgent = agent ? agent + '.installing' : null;
   const targets = [skill, agent, stagedSkill, stagedAgent].filter(Boolean);
   if ((await Promise.all(targets.map(exists))).some(Boolean)) {
-    process.stderr.write('目标或暂存目录已存在：不会覆盖同名 Skill 或代理。\n');
+    process.stderr.write(text('目标或暂存目录已存在：不会覆盖同名 Skill 或代理。') + '\n');
     process.exitCode = 2;
   } else if (args.includes('--dry-run')) {
     process.stdout.write(JSON.stringify({ host, skill, agent }, null, 2) + '\n');
@@ -32,6 +33,8 @@ if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
       await cp(join(packageRoot, 'LICENSE'), join(stagedSkill, 'LICENSE'), { errorOnExist: true, force: false });
       const entry = join(stagedSkill, 'SKILL.md');
       const instructions = (await readFile(entry, 'utf8'))
+        .replace(/^description:.*$/m, () => 'description: ' + JSON.stringify(localePresentation().skillDescription))
+        .replace(/^argument-hint:.*$/m, () => 'argument-hint: ' + JSON.stringify(localePresentation().argumentHint))
         .replaceAll('{{SKILLCREW_RUNTIME}}', join(skill, 'runtime', 'bin', 'skillcrew.mjs').replaceAll('\\', '/'))
         .replaceAll('{{SKILLCREW_SKILL_DIR}}', skill.replaceAll('\\', '/'));
       await writeFile(entry, instructions);
@@ -52,8 +55,17 @@ if (user === Boolean(project) || !['agy', 'claude'].includes(host)) {
       process.stdout.write(JSON.stringify({ host, skill, agent }, null, 2) + '\n');
     } catch (error) {
       for (const path of created.reverse()) await rm(path, { recursive: true, force: true });
-      process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
+      process.stderr.write(diagnostic(error instanceof Error ? error.message : String(error)) + '\n');
       process.exitCode = 1;
     }
   }
+}
+}
+
+try {
+  const selected = languageArguments(process.argv.slice(2));
+  await withLocale(selected.locale, () => install(selected.args));
+} catch (error) {
+  process.stderr.write(`${error instanceof Error ? error.message : String(error)}\n`);
+  process.exitCode = 1;
 }
